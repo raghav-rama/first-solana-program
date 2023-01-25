@@ -60,12 +60,7 @@ function App() {
                   const connection = new Connection(clusterApiUrl("devnet"));
                   const version = await connection.getVersion();
                   console.log("connection established to devnet", connection, version);
-                  const private_key = "2cbThFSkyEqvmznKPh9uX83TSXTzSwqJxho6z7ba3FiTwiAhq4CUqcrypq9WETGjAC3wDfhCwPcoAubLDyZ8NRpM";
-                  const encoded_priv_key = new TextEncoder().encode(private_key);
-                  console.log(encoded_priv_key);
-                  console.log(idl);
-                  const keypair = Keypair.fromSecretKey(encoded_priv_key);
-                  console.log(encoded_priv_key, keypair);
+                  console.log("idl:", idl);
                 }
               }>Establish Connection</Button>
             </Grid>

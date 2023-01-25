@@ -7,7 +7,9 @@ export const SendSOLToRandomAddress: FC = () => {
     const { connection } = useConnection();
     const { publicKey, sendTransaction } = useWallet();
 
+    
     const onClick = useCallback(async () => {
+        console.log(connection, publicKey);
         if (!publicKey) throw new WalletNotConnectedError();
 
         // 890880 lamports as of 2022-09-01
