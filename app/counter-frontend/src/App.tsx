@@ -2,11 +2,19 @@ import * as React from "react";
 
 import { Box, AppBar, Toolbar, Typography, Button, Grid } from "@mui/material";
 import { Wallet } from "./components/SolanaMultiWallet";
-import { Connection, Transaction, Keypair, clusterApiUrl } from "@solana/web3.js"
+import {
+  Connection,
+  Transaction,
+  Keypair,
+  clusterApiUrl,
+} from "@solana/web3.js";
+import { Context } from "./components/Context";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import idl from "./idl.json";
 
 import logo from "./logo.svg";
 import "./App.css";
+import { SendSOLToRandomAddress } from "./components/SendSOLToRandomAddress";
 
 function App() {
   return (
@@ -36,7 +44,9 @@ function App() {
             >
               Counter Frontend
             </Typography>
-            <Wallet />
+            <Context>
+              <WalletMultiButton />
+            </Context>
           </Toolbar>
         </AppBar>
       </Box>
@@ -46,26 +56,47 @@ function App() {
         <Box sx={{ display: "flex", gap: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Button variant="contained" sx={{ width: "90%" }}>Initialize</Button>
+              <Button variant="contained" sx={{ width: "90%" }}>
+                Initialize
+              </Button>
             </Grid>
             <Grid item xs={6}>
-              <Button variant="contained" sx={{ width: "90%" }}>Update</Button>
+              <Button variant="contained" sx={{ width: "90%" }}>
+                Update
+              </Button>
             </Grid>
             <Grid item xs={6}>
-              <Button variant="contained" sx={{ width: "90%" }}>Decrement</Button>
+              <Button variant="contained" sx={{ width: "90%" }}>
+                Decrement
+              </Button>
             </Grid>
             <Grid item xs={6}>
-              <Button variant="contained" sx={{ width: "90%" }}>Increment</Button>
+              <Button variant="contained" sx={{ width: "90%" }}>
+                Increment
+              </Button>
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" sx={{ width: "90%" }} onClick={
-                async () => {
+              <Button
+                variant="contained"
+                sx={{ width: "90%" }}
+                onClick={async () => {
                   const connection = new Connection(clusterApiUrl("devnet"));
                   const version = await connection.getVersion();
-                  console.log("connection established to devnet", connection, version);
+                  console.log(
+                    "connection established to devnet",
+                    connection,
+                    version
+                  );
                   console.log("idl:", idl);
-                }
-              }>Establish Connection</Button>
+                }}
+              >
+                console.log()
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <Context>
+                <SendSOLToRandomAddress />
+              </Context>
             </Grid>
           </Grid>
         </Box>
