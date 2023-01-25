@@ -294,8 +294,9 @@ module.exports = function (webpackEnv) {
     },
     resolve: {
       fallback: {
-        "crypto": false,
-        "stream": false,
+        "crypto": require.resolve("crypto-browserify"),
+        "stream": require.resolve("stream-browserify"),
+        "buffer": require.resolve("buffer/"),
       },
       // This allows you to set a fallback for where webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
@@ -568,6 +569,9 @@ module.exports = function (webpackEnv) {
     },
     plugins: [
       // Generates an `index.html` file with the <script> injected.
+      new webpack.ProvidePlugin({
+        Buffer: ["buffer", "Buffer"],
+      }),
       new HtmlWebpackPlugin(
         Object.assign(
           {},
