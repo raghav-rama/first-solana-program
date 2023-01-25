@@ -29,6 +29,9 @@ function App() {
                 textAlign: "left",
                 ml: 2,
                 fontFamily: "Roboto, sans-serif",
+                "@media (max-width: 600px)": {
+                  fontSize: "1rem",
+                },
               }}
             >
               Counter Frontend
