@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 600px) {
+  .wallet-adapter-button {
+    line-height: 18x;
+  }
+}
