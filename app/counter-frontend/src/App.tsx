@@ -8,7 +8,6 @@ import {
   Keypair,
   clusterApiUrl,
 } from "@solana/web3.js";
-import { Context } from "./components/Context";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import idl from "./idl.json";
 
@@ -44,9 +43,7 @@ function App() {
             >
               Counter Frontend
             </Typography>
-            <Context>
-              <WalletMultiButton />
-            </Context>
+            <WalletMultiButton />
           </Toolbar>
         </AppBar>
       </Box>
@@ -94,9 +91,7 @@ function App() {
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <Context>
-                <SendSOLToRandomAddress />
-              </Context>
+              <SendSOLToRandomAddress />
             </Grid>
           </Grid>
         </Box>
