@@ -5,6 +5,7 @@ import { Connection, clusterApiUrl } from "@solana/web3.js";
 import { Button } from "@mui/material";
 import { baseAccount } from "./Initialize";
 import IDL from "../idl/basic_1.json";
+import { counter } from "./CounterValue";
 
 const Increment: FC = () => {
   const wallet = useAnchorWallet() as Wallet;
@@ -29,6 +30,7 @@ const Increment: FC = () => {
         baseAccount.publicKey
       );
       console.log("Counter : ", account.data.toString());
+      console.log("Global Counter: ", counter);
     } catch (err) {
       console.log("Transaction err: ", err);
     }

@@ -5,6 +5,8 @@ import { Button } from "@mui/material";
 import IDL from "../idl/basic_1.json";
 import { Connection, clusterApiUrl } from "@solana/web3.js";
 import { baseAccount } from "./Initialize";
+import { counter } from "./CounterValue";
+import { account } from "./CounterValue";
 
 const Decrement: FC = () => {
   const wallet = useAnchorWallet() as Wallet;
@@ -30,13 +32,14 @@ const Decrement: FC = () => {
         baseAccount.publicKey
       );
       console.log("Counter: ", account.data.toString());
+      console.log("Global Counter: ", counter);
     } catch (err) {
       console.log("Transaction error: ", err);
     }
   }, [baseAccount, wallet]);
 
   return (
-    <Button variant="contained" onClick={decrement} sx={{ width: "90%" }}>
+    <Button variant="contained" onClick={decrement} sx={{ width: "90%" }} disabled={!account}>
       Decrement
     </Button>
   );

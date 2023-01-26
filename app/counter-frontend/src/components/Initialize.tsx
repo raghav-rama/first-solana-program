@@ -4,6 +4,7 @@ import { web3, Program, AnchorProvider, Wallet } from "@project-serum/anchor";
 import { Connection, clusterApiUrl } from "@solana/web3.js";
 import IDL from "../idl/basic_1.json";
 import { Button } from "@mui/material";
+import { counter } from "./CounterValue";
 
 const baseAccount = web3.Keypair.generate();
 
@@ -34,7 +35,8 @@ const Initialize: FC = () => {
         baseAccount.publicKey
       );
       console.log("account: ", account);
-      console.log("account data: ", account.data.toString());
+      console.log("Counter: ", account.data.toString());
+      console.log("Global Counter: ", counter);
     } catch (err) {
       console.log("Transaction error", err);
     }
