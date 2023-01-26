@@ -1,16 +1,11 @@
 import * as React from "react";
 
-import { Box, AppBar, Toolbar, Typography, Grid } from "@mui/material";
-import { Initialize } from "./components/Initialize";
-import { Update } from "./components/Update";
-import { Increment } from "./components/Increment";
-import { Decrement } from "./components/Decrement";
+import { Box, AppBar, Toolbar, Typography, } from "@mui/material";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { CounterValue, } from "./components/CounterValue";
+import { MyHeader } from "./components/MyHeader";
 
 import logo from "./logo.svg";
 import "./App.css";
-import { SendSOLToRandomAddress } from "./components/SendSOLToRandomAddress";
 
 function App() {
   return (
@@ -47,28 +42,7 @@ function App() {
 
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <CounterValue />
-            </Grid>
-            <Grid item xs={6}>
-              <Initialize />
-            </Grid>
-            <Grid item xs={6}>
-              <Update />
-            </Grid>
-            <Grid item xs={6}>
-              <Increment />
-            </Grid>
-            <Grid item xs={6}>
-              <Decrement />
-            </Grid>
-            <Grid item xs={12}>
-              <SendSOLToRandomAddress />
-            </Grid>
-          </Grid>
-        </Box>
+        <MyHeader />
       </header>
     </div>
   );
