@@ -4,14 +4,15 @@ import { Box, AppBar, Toolbar, Typography, Grid } from "@mui/material";
 import { Initialize } from "./components/Initialize";
 import { Update } from "./components/Update";
 import { Increment } from "./components/Increment";
-import { Decrement } from "./components/Decrement"
-import { WalletMultiButton, } from "@solana/wallet-adapter-react-ui";
+import { Decrement } from "./components/Decrement";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { CounterValue, } from "./components/CounterValue";
 
 import logo from "./logo.svg";
 import "./App.css";
 import { SendSOLToRandomAddress } from "./components/SendSOLToRandomAddress";
 
-function App() {  
+function App() {
   return (
     <div className="App">
       <Box component="nav" sx={{ flexGrow: 1 }}>
@@ -48,6 +49,9 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <Box sx={{ display: "flex", gap: 1 }}>
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <CounterValue />
+            </Grid>
             <Grid item xs={6}>
               <Initialize />
             </Grid>
