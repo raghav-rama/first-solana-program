@@ -4,15 +4,24 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Context } from "./components/Context";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Context>
-      <App />
-    </Context>
+    <ThemeProvider theme={theme}>
+      <Context>
+        <App />
+      </Context>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
