@@ -28,6 +28,9 @@ const UpdateModal: React.FC<UpdateModalProps> = (props) => {
     >
       <Box
         sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           position: "absolute",
           top: "50%",
           left: "50%",
@@ -37,10 +40,13 @@ const UpdateModal: React.FC<UpdateModalProps> = (props) => {
           borderRadius: 3,
           boxShadow: 24,
           p: 4,
+          "@media(max-width: 600px)": {
+            width: "75%",
+          },
         }}
       >
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={12} md={6} lg={6} xl={6} sx={{flexGrow: 1}}>
             <TextField
               id="outlined-basic"
               label="Enter counter value"
@@ -53,14 +59,22 @@ const UpdateModal: React.FC<UpdateModalProps> = (props) => {
               fullWidth
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={6}
+            lg={6}
+            xl={6}
+            >
             <Button
               variant="outlined"
               onClick={() => {
                 handleModalClose();
                 handleUpdate(input as number);
               }}
-            >
+              sx={{ "@media(max-width: 600px)": { right: "-35%" } }}
+              >
               Update
             </Button>
           </Grid>
