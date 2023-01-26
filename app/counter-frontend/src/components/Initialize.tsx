@@ -1,14 +1,21 @@
-import { FC } from "react";
+import { FC, } from "react";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { web3, Program, AnchorProvider, Wallet } from "@project-serum/anchor";
 import { Connection, clusterApiUrl } from "@solana/web3.js";
 import IDL from "../idl/basic_1.json";
 import { Button } from "@mui/material";
-import { counter } from "./CounterValue";
 
 const baseAccount = web3.Keypair.generate();
 
-const Initialize: FC = () => {
+interface InitializeProps {
+  account: any;
+  setAccount: React.Dispatch<React.SetStateAction<null>>;
+  counter: number;
+  setCounter: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Initialize: FC<InitializeProps> = (props) => {
+  const { account, setAccount, } = props;
   const wallet = useAnchorWallet() as Wallet;
   const initialize = async () => {
     const network = clusterApiUrl("devnet");
@@ -29,23 +36,27 @@ const Initialize: FC = () => {
           systemProgram: web3.SystemProgram.programId,
         })
         .signers([baseAccount])
-        .rpc();
-
-      const account: any = await program.account.myAccount.fetch(
-        baseAccount.publicKey
-      );
-      console.log("account: ", account);
-      console.log("Counter: ", account.data.toString());
-      console.log("Global Counter: ", counter);
+        .rpc()
+        .then(async () => {
+          const _account: any = await program.account.myAccount.fetch(
+            baseAccount.publicKey
+          );
+          setAccount(_account);
+        });
     } catch (err) {
       console.log("Transaction error", err);
     }
   };
-  return(
-    <Button variant="contained" onClick={initialize} sx={{ width: "90%" }}>
-        Initialize
+  return (
+    <Button
+      variant="contained"
+      onClick={initialize}
+      sx={{ width: "90%" }}
+      disabled={account}
+    >
+      Initialize
     </Button>
   );
 };
 
-export { Initialize, baseAccount }
+export { Initialize, baseAccount };

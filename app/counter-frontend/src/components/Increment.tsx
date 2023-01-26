@@ -5,9 +5,16 @@ import { Connection, clusterApiUrl } from "@solana/web3.js";
 import { Button } from "@mui/material";
 import { baseAccount } from "./Initialize";
 import IDL from "../idl/basic_1.json";
-import { counter } from "./CounterValue";
 
-const Increment: FC = () => {
+interface IncrementProps {
+  account: any;
+  setAccount: React.Dispatch<React.SetStateAction<null>>;
+  counter: number;
+  setCounter: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Increment: FC<IncrementProps> = (props) => {
+  const { account, setCounter } = props;
   const wallet = useAnchorWallet() as Wallet;
   const increment = useCallback(async () => {
     const network = clusterApiUrl("devnet");
@@ -25,19 +32,26 @@ const Increment: FC = () => {
         .accounts({
           myAccount: baseAccount.publicKey,
         })
-        .rpc();
-      const account: any = await program.account.myAccount.fetch(
-        baseAccount.publicKey
-      );
-      console.log("Counter : ", account.data.toString());
-      console.log("Global Counter: ", counter);
+        .rpc()
+        .then(async () => {
+          const account: any = await program.account.myAccount.fetch(
+            baseAccount.publicKey
+          );
+          console.log("Counter : ", account.data.toString());
+          setCounter(parseInt(account.data.toString()));
+        });
     } catch (err) {
       console.log("Transaction err: ", err);
     }
   }, [baseAccount, wallet]);
 
   return (
-    <Button variant="contained" onClick={increment} sx={{ width: "90%" }}>
+    <Button
+      variant="contained"
+      onClick={increment}
+      sx={{ width: "90%" }}
+      disabled={!account}
+    >
       Increment
     </Button>
   );
